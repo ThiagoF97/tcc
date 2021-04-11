@@ -15,42 +15,52 @@ using EyeXFramework;
 using Tobii.Interaction;
 using System.Speech.Synthesis;
 
+
 namespace mBook
 {
     public static class Controller{
     String metadata;
-    String[] metaDataVec;
-        public void setAllMetaData()
+    
+        public void setAllMetaData(int iBookId, XmlNode oBookNode)
         {
-            String metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+            CBook book = new CBook(iBookId, oBookNode);
+            Page pages = book.Pages;
+            foreach (Page pg in book.Pages)
+                {
+                    foreach (Line ln in pg.lines){
+                        foreach(Effect efct in ln.m_htEffects){
+                            //em desenvolvimento
+                        }
+                    }
+                }
+        }
+        
+        public void setMetaDataVision(String intensityValue, String intensityRange, String color){
+                    String metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
+                                    " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+                    MainProgram.metadata = metadata;
+                    MainProgram.start();
+                }
+
+        public void setMetaDataWind(String intensityValue, String intensityRange, String fade, String location){
+            metadata = "<sedl:Effect xsi:type=" + "sev:WindType" + " intensity-value=" + intensityValue +
+                            " intensity-range=" + intensityRange + " activate=" + "true" + "fade=" + fade + " location=:WCS:" + location + "/>";
             MainProgram.metadata = metadata;
             MainProgram.start();
         }
-        
-        public void setMetaData(String type, String intensityValue, String intensityRange, String color)
-        {
-            
-            if(type == "Vision" || type == "V"){
-            String metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
-            MainProgram.metadata = metadata;
-            MainProgram.start();
-            }
 
-            if(type == "Smell" || type == "S"){
+        public void setMetaDataSmell(String intensityValue, String intensityRange, String fade, String location){
             metadata = "<sedl:Effect xsi:type=" + "sev:ScentType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+                            " intensity-range=" + intensityRange + " activate=" + "true" + "fade=" + fade + " location=:WCS:" + location + "/>";
             MainProgram.metadata = metadata;
             MainProgram.start();
-            }
+        }
 
-            if(type == "Wind" || type == "W"){
-            metadata = "<sedl:Effect xsi:type=" + "sev:WindType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+        public void setMetaDataVibration(String intensityValue, String intensityRange, String fade){
+            metadata = "<sedl:Effect xsi:type=" + "sev:VibrationType" + " intensity-value=" + intensityValue +
+                            " intensity-range=" + intensityRange + " activate=" + "true" + "fade=" + fade + "/>";
             MainProgram.metadata = metadata;
             MainProgram.start();
-            }
         }
         
     }
