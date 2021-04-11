@@ -18,100 +18,40 @@ using System.Speech.Synthesis;
 namespace mBook
 {
     public static class Controller{
-    
-    //criar funçao para enviar mensagem para o MPEG-V parser
-        public void setEvento(String tipoEfeito){
-            
-            if(tipoEfeito == vision){
-                MainProgram.metadata = "";
-                MainProgram.Start();
-            }
-
-            if(tipoEfeito == smell){
-                MainProgram.metadata = "";
-                MainProgram.Start();
-            }
-
-            if(tipoEfeito == hearing){
-                MainProgram.metadata = "";
-                MainProgram.Start();
-            }
-
-            if(tipoEfeito == toutch){
-                MainProgram.metadata = "";
-                MainProgram.Start();
-
-            }
-
-            
+    String metadata;
+    String[] metaDataVec;
+        public void setAllMetaData()
+        {
+            String metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
+                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+            MainProgram.metadata = metadata;
+            MainProgram.start();
         }
-    //chamar função que ouve eventos
-        public void getEvento(Button button){
-            String textoButao = button.Text;
+        
+        public void setMetaData(String type, String intensityValue, String intensityRange, String color)
+        {
             
-            if(textoButao == "" || textoButao == null){
-                return;
+            if(type == "Vision" || type == "V"){
+            String metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
+                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+            MainProgram.metadata = metadata;
+            MainProgram.start();
             }
-            switch (textoButao){
-                case "Halloween":
-                setEvento("vision");                
-                break;
-                
-                case "brincar":
-                //visao
-                setEvento("vision");
-                break;
-                
-                case "pizza":
-                //cheiro
-                setEvento("smell");
-                break;
 
-                case "floresta":
-                //visão
-                setEvento("vision");
-                break;
-
-                case "porta":
-                //som e cheiro
-                setEvento("hearing");
-                setEvento("smell");
-                break;
-
-                case "barulho":
-                //som
-                setEvento("hearing");
-                break;
-
-                case "monstro":
-                //som
-                setEvento("hearing");
-                break;
-
-                case "televisão":
-                //som
-                setEvento("hearing");                
-                break;
-
-                default:
-                Console.WriteLine("Default case");
-                break;
+            if(type == "Smell" || type == "S"){
+            metadata = "<sedl:Effect xsi:type=" + "sev:ScentType" + " intensity-value=" + intensityValue +
+                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+            MainProgram.metadata = metadata;
+            MainProgram.start();
             }
+
+            if(type == "Wind" || type == "W"){
+            metadata = "<sedl:Effect xsi:type=" + "sev:WindType" + " intensity-value=" + intensityValue +
+                            " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
+            MainProgram.metadata = metadata;
+            MainProgram.start();
+            }
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        } 
     }
 }
