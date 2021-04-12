@@ -19,7 +19,7 @@ using System.Speech.Synthesis;
 namespace mBook
 {
     public static class Controller{
-    String metadata;
+    string metadata;
     
         public void setAllMetaData(int iBookId, XmlNode oBookNode)
         {
@@ -35,30 +35,30 @@ namespace mBook
                 }
         }
         
-        public void setMetaDataVision(String intensityValue, String intensityRange, String color){
-                    String metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
-                                    " intensity-range=" + intensityRange + " activate=" + "true" + " color=" + color + "/>";
-                    MainProgram.metadata = metadata;
-                    MainProgram.start();
-                }
+        public void setMetaDataVision(string intensityValue, string intensityRange, string color, string activate){    
+            metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
+                            " intensity-range=" + intensityRange + " activate=" + activate + " color=" + color + "/>";
+            MainProgram.metadata = metadata;
+            MainProgram.start();
+        }
 
-        public void setMetaDataWind(String intensityValue, String intensityRange, String fade, String location){
+        public void setMetaDataWind(string intensityValue, string intensityRange, string fade, string location, string activate){
             metadata = "<sedl:Effect xsi:type=" + "sev:WindType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + "true" + "fade=" + fade + " location=:WCS:" + location + "/>";
+                            " intensity-range=" + intensityRange + " activate=" + activate + "fade=" + fade + " location=:WCS:" + location + "/>";
             MainProgram.metadata = metadata;
             MainProgram.start();
         }
 
-        public void setMetaDataSmell(String intensityValue, String intensityRange, String fade, String location){
+        public void setMetaDataSmell(string intensityValue, string intensityRange, string fade, string location, string activate){
             metadata = "<sedl:Effect xsi:type=" + "sev:ScentType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + "true" + "fade=" + fade + " location=:WCS:" + location + "/>";
+                            " intensity-range=" + intensityRange + " activate=" + activate + "fade=" + fade + " location=:WCS:" + location + "/>";
             MainProgram.metadata = metadata;
             MainProgram.start();
         }
 
-        public void setMetaDataVibration(String intensityValue, String intensityRange, String fade){
+        public void setMetaDataVibration(string intensityValue, string intensityRange, string fade, string activate){
             metadata = "<sedl:Effect xsi:type=" + "sev:VibrationType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + "true" + "fade=" + fade + "/>";
+                            " intensity-range=" + intensityRange + " activate=" + activate + "fade=" + fade + "/>";
             MainProgram.metadata = metadata;
             MainProgram.start();
         }
