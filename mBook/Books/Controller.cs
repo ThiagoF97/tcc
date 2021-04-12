@@ -20,6 +20,7 @@ namespace mBook
 {
     public static class Controller{
     string metadata;
+    MainProgram mainProgram = new MainProgram();
     
         public void setAllMetaData(int iBookId, XmlNode oBookNode)
         {
@@ -38,29 +39,33 @@ namespace mBook
         public void setMetaDataVision(string intensityValue, string intensityRange, string color, string activate){    
             metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
                             " intensity-range=" + intensityRange + " activate=" + activate + " color=" + color + "/>";
-            MainProgram.metadata = metadata;
-            MainProgram.start();
+            
+            mainProgram.metadata = metadata;
+            mainProgram.start();
         }
 
         public void setMetaDataWind(string intensityValue, string intensityRange, string fade, string location, string activate){
             metadata = "<sedl:Effect xsi:type=" + "sev:WindType" + " intensity-value=" + intensityValue +
                             " intensity-range=" + intensityRange + " activate=" + activate + "fade=" + fade + " location=:WCS:" + location + "/>";
-            MainProgram.metadata = metadata;
-            MainProgram.start();
+            
+            mainProgram.metadata = metadata;
+            mainProgram.start();
         }
 
         public void setMetaDataSmell(string intensityValue, string intensityRange, string fade, string location, string activate){
             metadata = "<sedl:Effect xsi:type=" + "sev:ScentType" + " intensity-value=" + intensityValue +
                             " intensity-range=" + intensityRange + " activate=" + activate + "fade=" + fade + " location=:WCS:" + location + "/>";
-            MainProgram.metadata = metadata;
-            MainProgram.start();
+            
+            mainProgram.metadata = metadata;
+            mainProgram.start();
         }
 
         public void setMetaDataVibration(string intensityValue, string intensityRange, string fade, string activate){
             metadata = "<sedl:Effect xsi:type=" + "sev:VibrationType" + " intensity-value=" + intensityValue +
                             " intensity-range=" + intensityRange + " activate=" + activate + "fade=" + fade + "/>";
-            MainProgram.metadata = metadata;
-            MainProgram.start();
+            
+            mainProgram.metadata = metadata;
+            mainProgram.start();
         }
         
     }
