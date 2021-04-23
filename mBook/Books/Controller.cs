@@ -35,10 +35,66 @@ namespace mBook
                     }
                 }
         }
+
+        public void setMetaData(XmlNode oBookNode){
+            XmlNode oEffectsNode = oBookNode["effects"];
+            string sErrorMsg = "Não existem linhas cadastradas.";
+           
+            if (oEffectsNode == null)
+            {
+                MessageBox.Show(sErrorMsg, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            try
+            {
+                int iEffectId = 1;
+
+                foreach (XmlNode oActionNode in oEffectsNode)
+                {
+                    if (oActionNode.Type == "smell")
+                    {
+                        foreach (XmlNode oSmellActionNode in oActionNode){
+                            string intensityValue = "";
+                            string intensityRange = "";
+                            
+                            string fade = "";
+                            string location = "";
+                            string activate = "true";
+                            setMetaDataSmell(intensityValue, intensityRange, fade, location, activate);
+
+                        }
+                    }
+
+                    if (oActionNode.Type == "vision")
+                    {
+                        foreach (XmlNode oVisionActionNode in oActionNode){
+                            string intensityValue = "";
+                            string intensityRange = "";
+                            string color = oVisionActionNode.HEX;
+                            string fade = "";
+                            string location = "";
+                            string activate = "true";
+                            setMetaDataVision(intensityValue,intensityRange,color,fade,location,activate);
+
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Erro ao carregar linhas.", "Erro",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
         
-        public void setMetaDataVision(string intensityValue, string intensityRange, string color, string activate){    
+        
+        public void setMetaDataVision(string intensityValue, string intensityRange, string color, string fade, string location, string activate){    
             metadata = "<sedl:Effect xsi:type=" + "sev:LightType" + " intensity-value=" + intensityValue +
-                            " intensity-range=" + intensityRange + " activate=" + activate + " color=" + color + "/>";
+                            " intensity-range=" + intensityRange + " activate=" + activate + "fade=" + fade + " location=:WCS:" + location + " color=" + color + "/>";
             
             mainProgram.metadata = metadata;
             mainProgram.start();
@@ -67,6 +123,14 @@ namespace mBook
             mainProgram.metadata = metadata;
             mainProgram.start();
         }
-        
+        private void ConnectSound(string path)
+            {
+                SoundPlayer player = new SoundPlayer();
+
+                player.SoundLocation = path; //path do arquivo que contém o áudio
+                player.Play();
+                
+            }
+
     }
 }
